@@ -1,0 +1,52 @@
+﻿<Window x:Class="BugTracker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Bug Tracker" Height="350" Width="800">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!-- Title -->
+        <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" FontSize="32pt" FontFamily="Segoe UI Light" Text="[PROJECT NAME]" Padding="5,0,0,0"/>
+
+        <!-- Button -->
+        <Button Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Margin="0,0,20,5" Background="#FF70E856" BorderBrush="#FF4B7E40">Create New</Button>
+
+        <!-- Side Panel-->
+        <StackPanel Grid.Row="2" Grid.Column="0" Margin="5,0,0,0">
+            <TextBlock Name="myTextBlock" FontSize="14" Text="View: " />
+            <ComboBox Width="100" SelectedIndex="0">
+                <ComboBoxItem Name="view_all">All</ComboBoxItem>
+                <ComboBoxItem Name="view_user1">User 1</ComboBoxItem>
+                <ComboBoxItem Name="view_user2">User 2</ComboBoxItem>
+            </ComboBox>
+            <TextBlock FontSize="14" Text="Sort By: " />
+            <ComboBox Width="100" SelectedIndex="0">
+                <ComboBoxItem Name="sort_date">Date</ComboBoxItem>
+                <ComboBoxItem Name="sort_priority">Priority</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+
+        <!-- Bug List -->
+        <ScrollViewer Grid.Column="1" Grid.Row="2" Margin="0,0,0,10">
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                <StackPanel.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuColorKey}}"/>
+                </StackPanel.Background>
+                <TextBlock FontSize="20">Bug Item 1</TextBlock>
+                <Separator/>
+                <TextBlock FontSize="20">Bug Item 2</TextBlock>
+                <Separator/>
+                <TextBlock FontSize="20">Bug Item 3</TextBlock>
+                <Separator/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>
