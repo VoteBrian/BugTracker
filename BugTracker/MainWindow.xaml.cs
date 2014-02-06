@@ -20,8 +20,18 @@ namespace BugTracker
     /// </summary>
     public partial class MainWindow : Window
     {
+        SolidColorBrush brush_selected;
+        SolidColorBrush brush_idle;
+
         public MainWindow()
         {
+            // Initialize Brushes
+            brush_selected = new SolidColorBrush();
+            brush_selected.Color = (Color)FindResource(SystemColors.HighlightColorKey);
+
+            brush_idle = new SolidColorBrush();
+            brush_idle.Color = (Color)FindResource(SystemColors.ControlLightColorKey);
+
             InitializeComponent();
         }
 
@@ -30,6 +40,32 @@ namespace BugTracker
             Window_CreateNew cn = new Window_CreateNew();
             cn.Owner = Application.Current.MainWindow;
             cn.Show();
+        }
+
+        private void Show_Open(object sender, RoutedEventArgs e)
+        {
+            // highlight selected color
+            Btn_ShowOpen.Background = brush_selected;
+            Btn_ShowOpen.Foreground = Brushes.White;
+
+            // dim the other
+            Btn_ShowClosed.Background = brush_idle;
+            Btn_ShowClosed.Foreground = Brushes.Black;
+
+            // refresh bug list showing open bugs
+        }
+
+        private void Show_Closed(object sender, RoutedEventArgs e)
+        {
+            // highlight selected color
+            Btn_ShowClosed.Background = brush_selected;
+            Btn_ShowClosed.Foreground = Brushes.White;
+
+            // dim the other
+            Btn_ShowOpen.Background = brush_idle;
+            Btn_ShowOpen.Foreground = Brushes.Black;
+
+            // refresh bug list showing closed bugs
         }
     }
 }
