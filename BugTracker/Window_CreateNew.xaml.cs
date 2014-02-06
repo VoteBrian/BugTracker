@@ -23,5 +23,33 @@ namespace BugTracker
         {
             InitializeComponent();
         }
+
+        private void Update_Priority_Label(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            String priority = "";
+
+            switch((int)slider_priority.Value) {
+                case 1:
+                    priority = "LOW";
+                    break;
+                case 2:
+                    priority = "MEDIUM";
+                    break;
+                case 3:
+                    priority = "HIGH";
+                    break;
+                default:
+                    priority = "ERROR";
+                    break;
+            }
+
+            // Update label text
+            // On window initialization, Update_Priority_Label is called before label_priority is intialized
+            // It will therefore be null here and fail setting Content.
+            if (label_priority != null)
+            {
+                label_priority.Content = priority;
+            }
+        }
     }
 }
