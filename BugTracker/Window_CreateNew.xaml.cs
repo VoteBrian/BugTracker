@@ -10,26 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace BugTracker
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Window_CreateNew.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Window_CreateNew : Window
     {
-        public MainWindow()
+        public Window_CreateNew()
         {
             InitializeComponent();
-        }
-
-        private void OpenForm_CreateNew(object sender, RoutedEventArgs e)
-        {
-            Window_CreateNew cn = new Window_CreateNew();
-            cn.Owner = Application.Current.MainWindow;
-            cn.Show();
         }
     }
 }
