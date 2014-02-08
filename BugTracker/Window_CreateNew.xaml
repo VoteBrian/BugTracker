@@ -26,6 +26,7 @@
                 <WrapPanel>
                     <Slider Name="slider_priority" ValueChanged="Update_Priority_Label" Orientation="Horizontal" Width="150" HorizontalAlignment="Left"
                         Value="1" Minimum="1" Maximum="3" TickFrequency="1" Ticks="1, 2, 3" TickPlacement="BottomRight" IsSnapToTickEnabled="True"/>
+                    <Ellipse Name="circle_priority" Margin="40,0,0,0" Fill="LightGray" Height="15" Width="15" />
                     <Label Name="label_priority" FontSize="10pt" FontFamily="Segoe UI Light" Margin="10,0,0,0">LOW</Label>
                 </WrapPanel>
             </StackPanel>

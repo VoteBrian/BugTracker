@@ -26,20 +26,25 @@ namespace BugTracker
 
         private void Update_Priority_Label(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            String priority = "";
+            String priority_string = "";
+            Brush priority_color;
 
             switch((int)slider_priority.Value) {
                 case 1:
-                    priority = "LOW";
+                    priority_string = "LOW";
+                    priority_color = Brushes.LightGray;
                     break;
                 case 2:
-                    priority = "MEDIUM";
+                    priority_string = "MEDIUM";
+                    priority_color = Brushes.Yellow;
                     break;
                 case 3:
-                    priority = "HIGH";
+                    priority_string = "HIGH";
+                    priority_color = Brushes.Red;
                     break;
                 default:
-                    priority = "ERROR";
+                    priority_string = "ERROR";
+                    priority_color = Brushes.Red;
                     break;
             }
 
@@ -48,7 +53,8 @@ namespace BugTracker
             // It will therefore be null here and fail setting Content.
             if (label_priority != null)
             {
-                label_priority.Content = priority;
+                label_priority.Content = priority_string;
+                circle_priority.Fill = priority_color;
             }
         }
     }
