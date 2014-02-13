@@ -22,6 +22,9 @@ namespace BugTracker
     {
         SolidColorBrush brush_selected;
         SolidColorBrush brush_idle;
+        int status;
+        String projectName;
+        DbConnect gDb = new DbConnect();
 
         public MainWindow()
         {
@@ -33,6 +36,14 @@ namespace BugTracker
             brush_idle.Color = (Color)FindResource(SystemColors.ControlLightColorKey);
 
             InitializeComponent();
+
+            status = gDb.GetProjectName(ref projectName);
+            if (status != 0)
+            {
+                projectName = "[Initialize Project]";
+            }
+
+            Txt_ProjectName.Text = projectName;
         }
 
         private void OpenForm_CreateNew(object sender, RoutedEventArgs e)
@@ -66,6 +77,22 @@ namespace BugTracker
             Btn_ShowOpen.Foreground = Brushes.Black;
 
             // refresh bug list showing closed bugs
+        }
+
+        private void UpdateProjectTitle(object sender, RoutedEventArgs e)
+        {
+            int status;
+            String title = "";
+
+            gDb.QueryUser_ProjectTitle();
+
+            status = gDb.GetProjectName(ref title);
+            if (status != 0)
+            {
+                // error handling
+            }
+
+            Txt_ProjectName.Text = title;
         }
     }
 }
