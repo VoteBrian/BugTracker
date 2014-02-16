@@ -19,12 +19,18 @@ namespace BugTracker
     /// </summary>
     public partial class Window_CreateNew : Window
     {
+        DbConnect gDb = new DbConnect();
+
+        /*****************************************************************************/
         public Window_CreateNew()
+        /*****************************************************************************/
         {
             InitializeComponent();
         }
 
+        /*****************************************************************************/
         private void Update_Priority_Label(object sender, RoutedPropertyChangedEventArgs<double> e)
+        /*****************************************************************************/
         {
             String priority_string = "";
             Brush priority_color;
@@ -56,6 +62,43 @@ namespace BugTracker
                 label_priority.Content = priority_string;
                 circle_priority.Fill = priority_color;
             }
+        }
+
+        private void CreateNewBug(object sender, RoutedEventArgs e)
+        {
+            int priority;
+            String title, desc;
+            int status;
+            // ----------------------------------------
+
+            // Bug title
+            title = Txt_BugTitle.Text;
+            if (String.Compare(title, "") == 0)
+            {
+                // Highlight the Title field
+                Txt_BugTitle.BorderBrush = Brushes.Red;
+                return;
+            }
+
+            // Bug description
+            desc = Txt_BugDesc.Text;
+            
+            // Bug priority
+            priority = (int)slider_priority.Value;
+
+            // Insert new bug to database
+            status = gDb.CreateNewBug(title, desc, priority);
+            if (status != 0)
+            {
+                // error handling
+            }
+
+            this.Close();
+        }
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

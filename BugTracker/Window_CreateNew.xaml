@@ -16,12 +16,15 @@
 
         <Border Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Padding="10">
             <StackPanel>
+                <!-- Title -->
                 <Label FontSize="12pt" FontFamily="Segoe UI Light">TITLE</Label>
-                <TextBox MaxLength="128" FontSize="12pt" />
-        
-                <Label FontSize="12pt" FontFamily="Segoe UI Light">DESCRIPTION</Label>
-                <TextBox Height="72pt" FontSize="12pt" TextWrapping="Wrap"/>
+                <TextBox Name="Txt_BugTitle" MaxLength="128" FontSize="12pt" />
 
+                <!-- Description -->
+                <Label FontSize="12pt" FontFamily="Segoe UI Light">DESCRIPTION</Label>
+                <TextBox Name="Txt_BugDesc" Height="72pt" FontSize="12pt" TextWrapping="Wrap"/>
+
+                <!-- Priority -->
                 <Label FontSize="12pt" FontFamily="Segoe UI Light">PRIORITY</Label>
                 <WrapPanel>
                     <Slider Name="slider_priority" ValueChanged="Update_Priority_Label" Orientation="Horizontal" Width="150" HorizontalAlignment="Left"
@@ -32,7 +35,9 @@
             </StackPanel>
         </Border>
 
-        <Button Grid.Column="1" Grid.Row="1" Width="Auto" Margin="5">CREATE</Button>
-        <Button Grid.Column="2" Grid.Row="1" Width="Auto" Margin="5">CANCEL</Button>
+        <Button Grid.Column="1" Grid.Row="1" Width="Auto" Margin="5"
+                Click="CreateNewBug">CREATE</Button>
+        <Button Grid.Column="2" Grid.Row="1" Width="Auto" Margin="5"
+                Click="Cancel">CANCEL</Button>
     </Grid>
 </Window>

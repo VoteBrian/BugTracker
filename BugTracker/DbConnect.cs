@@ -112,6 +112,37 @@ namespace BugTracker
         }
 
         /*****************************************************************************/
+        public int CreateNewBug(String title, String description, int priority)
+        /*****************************************************************************/
+        {
+            String query;
+            Boolean status;
+            // ----------------------------------------
+
+            // connect and open database
+            status = ConnectDb();
+            if (status != true)
+            {
+                // Database doesn't exist
+                return (int)DB_ERROR.DOES_NOT_EXIST;
+            }
+
+            query = String.Format("INSERT INTO Bugs (title, [desc], priority) VALUES ('{0}', '{1}', {2})",
+                title, description, priority);
+
+            status = UpdateDb(query);
+            if (status != true)
+            {
+                return (int)DB_ERROR.QUERY_FAILED;
+            }
+
+            // close database connection
+            CloseDb();
+
+            return (int)DB_ERROR.NO_ERROR;
+        }
+
+        /*****************************************************************************/
         private Boolean ConnectDb()
         /*****************************************************************************/
         {
