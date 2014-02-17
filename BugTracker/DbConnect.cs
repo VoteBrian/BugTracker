@@ -15,7 +15,6 @@ namespace BugTracker
             NO_ERROR,
             DOES_NOT_EXIST,
             TABLE_MISSING,
-            NUM_ERROR_MSGS,
             QUERY_FAILED,
             NO_DATA_RETURNED
         };
@@ -259,6 +258,33 @@ namespace BugTracker
             }
 
             return true;
+        }
+
+        /*****************************************************************************/
+        public void Get_DbError_String(int status, ref String description)
+        /*****************************************************************************/
+        {
+            switch (status)
+            {
+                case (int)DB_ERROR.NO_ERROR:
+                    description = "No error";
+                    break;
+                case (int)DB_ERROR.DOES_NOT_EXIST:
+                    description = "Data base does not exist";
+                    break;
+                case (int)DB_ERROR.TABLE_MISSING:
+                    description = "The requested table does not exist";
+                    break;
+                case (int)DB_ERROR.QUERY_FAILED:
+                    description = "The attempted query failed";
+                    break;
+                case (int)DB_ERROR.NO_DATA_RETURNED:
+                    description = "The attempted query returned no data";
+                    break;
+                default:
+                    description = "Unknown error";
+                    break;
+            }
         }
     }
 }

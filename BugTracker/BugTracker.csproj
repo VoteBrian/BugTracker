@@ -54,6 +54,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DbConnect.cs" />
+    <Compile Include="Error.cs" />
     <Compile Include="Window_CreateNew.xaml.cs">
       <DependentUpon>Window_CreateNew.xaml</DependentUpon>
     </Compile>

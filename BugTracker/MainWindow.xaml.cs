@@ -23,6 +23,8 @@ namespace BugTracker
         SolidColorBrush brush_selected;
         SolidColorBrush brush_idle;
         DbConnect gDb = new DbConnect();
+        String error_msg = "";
+        Error err;
 
         /*****************************************************************************/
         public MainWindow()
@@ -31,6 +33,7 @@ namespace BugTracker
             int status;
             String projectName = "";
             String[] users_list = { };
+            err = new Error();
             // ----------------------------------------
 
             // Initialize Brushes
@@ -53,7 +56,12 @@ namespace BugTracker
             Txt_ProjectName.Text = projectName;
 
             // Set user dropdown list
-            gDb.Get_UserList(ref users_list);
+            status = gDb.Get_UserList(ref users_list);
+            if (status != 0)
+            {
+                gDb.Get_DbError_String(status, ref error_msg);
+                err.Report_Error(error_msg);
+            }
             foreach (String user in users_list)
             {
                 ComboBoxItem item = new ComboBoxItem();
@@ -116,7 +124,8 @@ namespace BugTracker
             status = gDb.GetProjectName(ref title);
             if (status != 0)
             {
-                // error handling
+                gDb.Get_DbError_String(status, ref error_msg);
+                err.Report_Error(error_msg);
             }
 
             Txt_ProjectName.Text = title;
