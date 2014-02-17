@@ -49,6 +49,7 @@ namespace BugTracker
             DataRowCollection dataRows;
             DataRow row;
             DataSet dataSet = new DataSet();
+            // ----------------------------------------
 
             // connect and open database
             status = ConnectDb();
@@ -83,11 +84,47 @@ namespace BugTracker
         }
 
         /*****************************************************************************/
+        public int Get_UserList(ref String[] users)
+        /*****************************************************************************/
+        {
+            Boolean status;
+            String query;
+            DataSet dataSet = new DataSet();
+            DataRowCollection dataRows;
+            int x;
+            // ----------------------------------------
+
+            // connect and open database
+            status = ConnectDb();
+            if (status != true)
+            {
+                // Database doesn't exist
+                return (int)DB_ERROR.DOES_NOT_EXIST;
+            }
+
+            query = "SELECT name from Users";
+            status = QueryDb(query, "Users", ref dataSet);
+
+            dataRows = dataSet.Tables["Users"].Rows;
+            users = new String[dataRows.Count];
+            for (x = 0; x < dataRows.Count; x++)
+            {
+                users[x] = (String)dataRows[x][0];
+            }
+
+            // close database connection
+            CloseDb();
+
+            return (int)DB_ERROR.NO_ERROR;
+        }
+
+        /*****************************************************************************/
         public int Update_ProjectName(String name)
         /*****************************************************************************/
         {
             Boolean status;
             String projectQuery = "";
+            // ----------------------------------------
 
             // connect and open database
             status = ConnectDb();

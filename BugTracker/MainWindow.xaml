@@ -29,12 +29,14 @@
         <!-- Side Panel-->
         <StackPanel Grid.Row="2" Grid.Column="0" Margin="5,0,0,0">
             <WrapPanel Margin="0,0,0,20">
+                <!-- Show Open -->
                 <Button Name="Btn_ShowOpen" Width="50" Foreground="White" Click="Show_Open">
                     <Button.Background>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
                     </Button.Background>
                     Open
                 </Button>
+                <!-- Show Closed -->
                 <Button Name="Btn_ShowClosed" Width="50" Foreground="Black" Click="Show_Closed">
                     <Button.Background>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
@@ -42,16 +44,16 @@
                     Closed
                 </Button>
             </WrapPanel>
-            
+
+            <!-- Users -->
             <TextBlock Name="myTextBlock" FontSize="12" FontFamily="Segoe UI Light" Text="ASSIGNED" />
-            <ComboBox Width="100" SelectedIndex="0" Margin="0,0,0,20" HorizontalAlignment="Left" >
-                <ComboBoxItem Name="view_all">All</ComboBoxItem>
-                <ComboBoxItem Name="view_user1">User 1</ComboBoxItem>
-                <ComboBoxItem Name="view_user2">User 2</ComboBoxItem>
+            <ComboBox Name="CB_Users" Width="100" SelectedIndex="0" Margin="0,0,0,20" HorizontalAlignment="Left" >
+                <!-- ComboBoxItems added on load -->
             </ComboBox>
 
+            <!-- Sort -->
             <TextBlock FontSize="12" FontFamily="Segoe UI Light" Text="SORT" />
-            <ComboBox Width="100" SelectedIndex="0" Margin="0,0,0,20" HorizontalAlignment="Left" >
+            <ComboBox Name="CB_Sort" Width="100" SelectedIndex="0" Margin="0,0,0,20" HorizontalAlignment="Left" >
                 <ComboBoxItem Name="sort_new">Newest</ComboBoxItem>
                 <ComboBoxItem Name="sort_old">Oldest</ComboBoxItem>
                 <ComboBoxItem Name="sort_priority">Priority</ComboBoxItem>

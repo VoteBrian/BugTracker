@@ -22,12 +22,17 @@ namespace BugTracker
     {
         SolidColorBrush brush_selected;
         SolidColorBrush brush_idle;
-        int status;
-        String projectName;
         DbConnect gDb = new DbConnect();
 
+        /*****************************************************************************/
         public MainWindow()
+        /*****************************************************************************/
         {
+            int status;
+            String projectName = "";
+            String[] users_list = { };
+            // ----------------------------------------
+
             // Initialize Brushes
             brush_selected = new SolidColorBrush();
             brush_selected.Color = (Color)FindResource(SystemColors.HighlightColorKey);
@@ -37,23 +42,40 @@ namespace BugTracker
 
             InitializeComponent();
 
+            // TODO: Check for database, create if it doesn't exist
+
+            // Set project name
             status = gDb.GetProjectName(ref projectName);
             if (status != 0)
             {
                 projectName = "[Initialize Project]";
             }
-
             Txt_ProjectName.Text = projectName;
+
+            // Set user dropdown list
+            gDb.Get_UserList(ref users_list);
+            foreach (String user in users_list)
+            {
+                ComboBoxItem item = new ComboBoxItem();
+                item.Content = user;
+                CB_Users.Items.Add(item);
+            }
+
+            // TODO: Populate bug list
         }
 
+        /*****************************************************************************/
         private void OpenForm_CreateNew(object sender, RoutedEventArgs e)
+        /*****************************************************************************/
         {
             Window_CreateNew cn = new Window_CreateNew();
             cn.Owner = Application.Current.MainWindow;
             cn.Show();
         }
 
+        /*****************************************************************************/
         private void Show_Open(object sender, RoutedEventArgs e)
+        /*****************************************************************************/
         {
             // highlight selected color
             Btn_ShowOpen.Background = brush_selected;
@@ -66,7 +88,9 @@ namespace BugTracker
             // refresh bug list showing open bugs
         }
 
+        /*****************************************************************************/
         private void Show_Closed(object sender, RoutedEventArgs e)
+        /*****************************************************************************/
         {
             // highlight selected color
             Btn_ShowClosed.Background = brush_selected;
@@ -79,10 +103,13 @@ namespace BugTracker
             // refresh bug list showing closed bugs
         }
 
+        /*****************************************************************************/
         private void UpdateProjectTitle(object sender, RoutedEventArgs e)
+        /*****************************************************************************/
         {
             int status;
             String title = "";
+            // ----------------------------------------
 
             gDb.QueryUser_ProjectTitle();
 
